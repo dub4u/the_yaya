@@ -1,0 +1,27 @@
+/* example configuration. rename to config.js to activate! */
+
+// the reddit user account of the bot
+//
+var credentials = {
+  username: 'USERNAME',
+  password: 'PASSWORD'
+};
+
+// from https://www.reddit.com/prefs/apps/
+//
+var app = {
+  id: 'APP-ID',
+  secret: 'APP-SECRET'
+};
+
+// defaults
+//
+var defaults = {
+  subreddit: "DEFAULT_SUBREDDIT"
+};
+
+module.exports = {
+  credentials: credentials,
+  app: app,
+  defaults: defaults
+};

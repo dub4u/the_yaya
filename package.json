@@ -1,0 +1,20 @@
+{
+  "name": "the_yaya",
+  "version": "1.0.0",
+  "author": "dub4u",
+  "description": "bot for r/Philippines",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dub4u/the_yaya.git"
+  },
+  "dependencies": {
+    "async": "^0.9.0",
+    "entities": "^1.1.1",
+    "raw.js": "^0.3.1",
+    "request-json": "^0.4.12",
+    "sqlite3": "^2.2.7",
+    "strftime": "^0.8.2"
+  },
+  "devDependencies": {},
+  "license": "ISC"
+}

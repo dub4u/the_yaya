@@ -1,0 +1,7 @@
+node_modules
+db/what_to_do.sdb
+lib/config.js
+lib/quote/quotes.json
+lib/quote/quotes.log
+lib/quote/test.js
+eggdrop
