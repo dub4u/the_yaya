@@ -21,6 +21,30 @@ client.addListener('error', function(err) {
   console.log(err);
 });
 
+client.addListener('nick', function(oldnick, newnick) {
+  log(oldnick + ' is now known as ' + newnick);
+});
+
+client.addListener('nick', function(oldnick, newnick) {
+  log('-- ' + oldnick + ' is now known as ' + newnick);
+});
+
+client.addListener('join', function(channel, nick) {
+  log('>> ' + nick + ' joined');
+});
+
+client.addListener('part', function(channel, nick, reason) {
+  log('<< ' + nick + ' left (' + reason + ')');
+});
+
+client.addListener('quit', function(nick, reason) {
+  log('<< ' + nick + ' quit (' + reason + ')');
+});
+
+client.addListener('topic', function(channel, topic, nick) {
+  log('!! ' + nick + ' changed the topic to "' + topic + '"');
+});
+
 client.addListener('message', function(from, to, msg) {
   log(from + ' ' + to + ' ' + msg);
 });
