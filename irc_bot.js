@@ -78,21 +78,17 @@ var new_post = function() {
     } else {
       if (response.children.length) {
         if (before) {
-          for (var i = response.children.length-1; i >= 0; i--) {
-            (function(post) {
-              setTimeout(function() {
-                var msg = format.green.underline('http://redd.it/' + post.id)
+          for (var i = response.children.length; i > 0; i--) {
+            var post = response.children[i].data,
+                msg = format.green.underline('http://redd.it/' + post.id)
                     + ' ' + format.navy.bold(post.title)
                     + ' by ' + format.brown.italic(post.author)
 
-                if (post.selftext) {
-                  msg += ': ' + post.selftext;
-                }
+            if (post.selftext) {
+              msg += ': ' + post.selftext;
+            }
 
-                say(msg);
-
-              }, 800)
-            })(response.children[i].data);
+            say(msg);
           }
         }
 
