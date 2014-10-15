@@ -22,10 +22,6 @@ client.addListener('error', function(err) {
 });
 
 client.addListener('nick', function(oldnick, newnick) {
-  log(oldnick + ' is now known as ' + newnick);
-});
-
-client.addListener('nick', function(oldnick, newnick) {
   log('-- ' + oldnick + ' is now known as ' + newnick);
 });
 
