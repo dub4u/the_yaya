@@ -14,6 +14,16 @@ var app = {
   secret: 'APP-SECRET'
 };
 
+// irc configuration
+// 
+var irc = {
+  nick: credentials.username,
+  pass: 'NICKSERV-PASSWORD',
+  host: 'IRC-SERVER',
+  channel: '#CHANNELNAME'
+};
+    
+
 // defaults
 //
 var defaults = {
@@ -23,5 +33,6 @@ var defaults = {
 module.exports = {
   credentials: credentials,
   app: app,
+  irc: irc,
   defaults: defaults
 };

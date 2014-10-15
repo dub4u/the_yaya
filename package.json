@@ -10,6 +10,8 @@
   "dependencies": {
     "async": "^0.9.0",
     "entities": "^1.1.1",
+    "irc": "^0.3.7",
+    "irc-colors": "^1.1.0",
     "raw.js": "^0.3.1",
     "request-json": "^0.4.12",
     "sqlite3": "^2.2.7",
