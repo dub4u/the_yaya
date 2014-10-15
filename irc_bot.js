@@ -74,7 +74,7 @@ var new_post = function() {
     } else {
       if (response.children.length) {
         if (before) {
-          for (var i = response.children.length; i > 0; i--) {
+          for (var i = response.children.length-1; i >= 0; i--) {
             var post = response.children[i].data,
                 msg = format.green.underline('http://redd.it/' + post.id)
                     + ' ' + format.navy.bold(post.title)
