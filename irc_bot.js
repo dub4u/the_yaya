@@ -9,7 +9,8 @@ var irc = require('irc'),
 reddit.setupOAuth2(config.app.id, config.app.secret);
 
 var client = new irc.Client(config.irc.host, config.irc.nick, {
-  channels: [config.irc.channel]
+  channels: [config.irc.channel],
+  messageSplit: 2048
 });
 
 client.addListener('registered', function(msg) {
@@ -86,7 +87,7 @@ var new_post = function() {
                     + ' by ' + format.brown.italic(post.author)
 
             if (post.selftext) {
-              msg += ': ' + post.selftext;
+              msg += ': ' + post.selftext.replace(/\n/g, ' ');;
             }
 
             say(msg);
