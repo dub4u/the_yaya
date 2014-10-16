@@ -26,7 +26,7 @@ getQuote(silent, function(quote) {
   if (quote) {
     submission.text = quote + '\n\n' + submission.text;
   }
-  submit(submission, function(err, id) {
+  submit.post(submission, function(err, id) {
     if (err) {
       error(err);
     } else {
