@@ -41,6 +41,10 @@ client.addListener('topic', function(channel, topic, nick) {
   log('!! ' + nick + ' changed the topic to "' + topic + '"');
 });
 
+client.addListener('kick', function(channel, nick, by, reason) {
+  log('<< ' + nick + ' was kicked by ' + by + '(' + reason + ')');
+});
+
 client.addListener('message', function(from, to, msg) {
   log(from + ' ' + to + ' ' + msg);
 });
