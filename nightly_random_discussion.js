@@ -3,6 +3,13 @@ var request  = require('request-json');
 var config   = require('./lib/config');
 var submit   = require('./lib/submit');
 
+// first argument from the command line can be used to
+// override the subreddit that we are submitting to
+//
+if (process.argv[2]) {
+  config.defaults.subreddit = process.argv[2];
+}
+
 // the actual post to be submitted
 //
 var submission = {
@@ -12,13 +19,6 @@ var submission = {
   'inboxReplies': false,
   'save': false,
 };
-
-// first argument from the command line can be used to
-// override the subreddit that we are submitting to
-//
-if (process.argv[2]) {
-  submission.r = process.argv[2];
-}
 
 submit.post(submission, function(err, id) {
   if (err) {
