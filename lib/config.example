@@ -7,6 +7,10 @@ var credentials = {
   password: 'PASSWORD'
 };
 
+// the HTTP UserAgent that the bot identifies himself with
+// 
+var user_agent = 'USER-AGENT';
+
 // from https://www.reddit.com/prefs/apps/
 //
 var app = {
@@ -23,7 +27,6 @@ var irc = {
   channel: '#CHANNELNAME'
 };
     
-
 // defaults
 //
 var defaults = {
@@ -32,6 +35,7 @@ var defaults = {
 
 module.exports = {
   credentials: credentials,
+  user_agent: user_agent,
   app: app,
   irc: irc,
   defaults: defaults

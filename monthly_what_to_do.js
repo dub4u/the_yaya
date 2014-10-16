@@ -8,7 +8,7 @@ var config   = require('./lib/config');
 
 // set up reddit api
 //
-var reddit = new rawjs('the_yaya-monthly_what_to_do/0.2 by dub4u');
+var reddit = new rawjs(config.user_agent);
 reddit.setupOAuth2(config.app.id, config.app.secret);
 
 // database for remembering past posts

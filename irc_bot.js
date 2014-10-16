@@ -3,7 +3,7 @@ var irc = require('irc'),
     strftime = require('strftime'),
     format = require('irc-colors'),
     rawjs = require('raw.js'),
-    reddit = new rawjs('the_yaya-snoonet_bot/1.0 by dub4u'),
+    reddit = new rawjs(config.user_agent),
     before;
 
 reddit.setupOAuth2(config.app.id, config.app.secret);
