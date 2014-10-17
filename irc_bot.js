@@ -19,6 +19,7 @@ client.addListener('registered', function(msg) {
 
 client.addListener('error', function(err) {
   // if (err.rawCommand != '421') console.log(err);
+  log('ERROR in irc client');
   console.log(err);
 });
 
@@ -75,7 +76,7 @@ var new_post = function() {
 
   reddit.new(options, function(err, response) {
     if (err) {
-      log('error');
+      log('ERROR fetching new posts');
       console.log(err);
     } else {
       if (response.children.length) {
