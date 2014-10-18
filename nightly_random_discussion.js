@@ -1,7 +1,7 @@
 var strftime = require('strftime');
 var request  = require('request-json');
 var config   = require('./lib/config');
-var submit   = require('./lib/submit');
+var reddit   = require('./lib/reddit');
 
 // first argument from the command line can be used to
 // override the subreddit that we are submitting to
@@ -20,7 +20,7 @@ var submission = {
   'save': false,
 };
 
-submit.post(submission, function(err, id) {
+reddit.post(submission, function(err, id) {
   if (err) {
     error(err);
   } else {
@@ -37,7 +37,7 @@ submit.post(submission, function(err, id) {
         if (post) {
           var text = 'Today\'s [Ask PHreddit](' + post.url + '): '
                    + post.title;
-          submit.comment('t3_' + id, text, function(err, id) {
+          reddit.comment('t3_' + id, text, function(err, id) {
             if (err) {
               error(err);
             } else {

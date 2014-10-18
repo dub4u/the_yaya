@@ -1,7 +1,7 @@
 var strftime = require('strftime');
 var config   = require('./lib/config');
 var getQuote = require('./lib/quote');
-var submit   = require('./lib/submit');
+var reddit   = require('./lib/reddit');
 
 // the actual post to be submitted
 //
@@ -26,7 +26,7 @@ getQuote(silent, function(quote) {
   if (quote) {
     submission.text = quote + '\n\n' + submission.text;
   }
-  submit.post(submission, function(err, id) {
+  reddit.post(submission, function(err, id) {
     if (err) {
       error(err);
     } else {
