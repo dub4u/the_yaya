@@ -20,7 +20,7 @@ var submission = {
   'save': false,
 };
 
-reddit.post(submission, function(err, id) {
+reddit.submit(submission, function(err, id) {
   if (err) {
     error(err);
   } else {
