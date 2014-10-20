@@ -4,7 +4,7 @@ var irc = require('irc'),
     format = require('irc-colors'),
     rawjs = require('raw.js'),
     reddit = new rawjs(config.user_agent),
-    before;
+    latest;
 
 reddit.setupOAuth2(config.app.id, config.app.secret);
 
@@ -60,9 +60,10 @@ var log = function(msg) {
   console.log(strftime('%F %T ') + msg)
 }
 
-// check for new r/philippines posts
+// check for new r/philippines posts and if any
+// are found, post them to the channel
 //
-var new_post = function() {
+var report_new_posts = function() {
 
   var options = {
     r: 'Philippines',
@@ -70,37 +71,40 @@ var new_post = function() {
     all: true
   };
 
-  if (before) {
-    options.before = before;
-  }
-
   reddit.new(options, function(err, response) {
     if (err) {
       log('ERROR fetching new posts');
       console.log(err);
     } else {
       if (response.children.length) {
-        if (before) {
+        if (latest) {
           for (var i = response.children.length-1; i >= 0; i--) {
-            var post = response.children[i].data,
-                msg = format.green.underline('http://redd.it/' + post.id)
-                    + ' ' + format.navy.bold(post.title)
-                    + ' by ' + format.brown.italic(post.author)
+            var post = response.children[i].data;
 
-            if (post.selftext) {
-              msg += ': ' + post.selftext.replace(/\n/g, ' ');;
+            if (post.created_utc > latest) {
+
+              latest = post.created_utc;
+
+              var msg = format.green('http://redd.it/' + post.id)
+                      + ' ' + format.navy.bold(post.title)
+                      + ' by ' + format.brown.italic(post.author)
+
+              if (post.selftext) {
+                msg += ': ' + post.selftext.replace(/\n/g, ' ');;
+              }
+
+              say(msg);
+
             }
-
-            say(msg);
           }
         }
 
-        before = response.children[0].data.name;
+        latest = response.children[0].data.created_utc;
       }
     }
   });
 
-  setTimeout(new_post, 30000);
+  setTimeout(report_new_posts, 30000);
 }; 
 
-setTimeout(new_post, 15000);
+setTimeout(report_new_posts, 5000);
