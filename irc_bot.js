@@ -4,7 +4,7 @@ var irc = require('irc'),
     format = require('irc-colors'),
     rawjs = require('raw.js'),
     reddit = new rawjs(config.user_agent),
-    latest;
+    latest = 0;
 
 reddit.setupOAuth2(config.app.id, config.app.secret);
 
@@ -60,6 +60,10 @@ var log = function(msg) {
   console.log(strftime('%F %T ') + msg)
 }
 
+var debug = function(msg) {
+  process.stderr.write(strftime('%T ') + msg + '\n');
+}
+
 // check for new r/philippines posts and if any
 // are found, post them to the channel
 //
@@ -77,16 +81,20 @@ var report_new_posts = function() {
       console.log(err);
     } else {
       if (response.children.length) {
-        if (latest) {
-          for (var i = response.children.length-1; i >= 0; i--) {
-            var post = response.children[i].data;
 
-            if (post.created_utc > latest) {
+        var init = (latest === 0);
 
-              latest = post.created_utc;
+        for (var i = response.children.length-1; i >= 0; i--) {
+          var post = response.children[i].data;
 
-              var msg = format.green('http://redd.it/' + post.id)
-                      + ' ' + format.navy.bold(post.title)
+          if (post.created_utc > latest) {
+
+            latest = post.created_utc;
+
+            if (!init) {
+
+              var msg = 'http://redd.it/' + post.id
+                      + ' ' + format.green.bold(post.title)
                       + ' by ' + format.brown.italic(post.author)
 
               if (post.selftext) {
@@ -94,12 +102,9 @@ var report_new_posts = function() {
               }
 
               say(msg);
-
             }
           }
         }
-
-        latest = response.children[0].data.created_utc;
       }
     }
   });
