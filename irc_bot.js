@@ -2,11 +2,9 @@ var irc = require('irc'),
     config = require('./lib/config'),
     strftime = require('strftime'),
     format = require('irc-colors'),
-    rawjs = require('raw.js'),
-    reddit = new rawjs(config.user_agent),
+    request  = require('request-json'),
+    reddit = request.newClient('http://www.reddit.com/'),
     latest = 0;
-
-reddit.setupOAuth2(config.app.id, config.app.secret);
 
 var client = new irc.Client(config.irc.host, config.irc.nick, {
   channels: [config.irc.channel],
@@ -69,23 +67,22 @@ var debug = function(msg) {
 //
 var report_new_posts = function() {
 
-  var options = {
-    r: 'Philippines',
-    limit: 5,
-    all: true
-  };
+  var url = '/user/the_yaya/m/all_pinoy/new/.json';
 
-  reddit.new(options, function(err, response) {
+  reddit.get(url, function(err, res, body) {
     if (err) {
       log('ERROR fetching new posts');
       console.log(err);
     } else {
-      if (response.children.length) {
+
+      if (body.data.children.length) {
 
         var init = (latest === 0);
 
-        for (var i = response.children.length-1; i >= 0; i--) {
-          var post = response.children[i].data;
+        var children = body.data.children;
+
+        for (var i = children.length-1; i >= 0; i--) {
+          var post = children[i].data;
 
           if (post.created_utc > latest) {
 
@@ -94,6 +91,7 @@ var report_new_posts = function() {
             if (!init) {
 
               var msg = 'http://redd.it/' + post.id
+                      + ' in r/' + post.subreddit + ':'
                       + ' ' + format.green.bold(post.title)
                       + ' by ' + format.brown.italic(post.author)
 
