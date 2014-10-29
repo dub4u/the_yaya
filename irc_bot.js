@@ -51,7 +51,8 @@ client.addListener('message', function(from, to, msg) {
 
 var say = function(msg) {
   client.say(config.irc.channel, msg)
-  log(config.irc.nick + ' ' + config.irc.channel + ' ' + msg);
+  log(config.irc.nick + ' ' + config.irc.channel + ' '
+      + format.stripColorsAndStyle(msg));
 }
 
 var log = function(msg) {
