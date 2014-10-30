@@ -7,7 +7,7 @@ var reddit   = require('./lib/reddit');
 //
 var submission = {
   'title': strftime('Daily random discussion - %b %d, %Y'),
-  'text': strftime('Happy %A!!'),
+  'text': config.slogan,
   'r': config.defaults.subreddit,
   'inboxReplies': false,
   'save': false,
@@ -24,8 +24,10 @@ var silent = "Philippines" !== submission.r;
 
 getQuote(silent, function(quote) {
   if (quote) {
-    submission.text = quote + '\n\n' + submission.text;
+    submission.text += quote + '\n\n';
   }
+  submission.text += strftime('Happy %A!!');
+
   reddit.submit(submission, function(err, id) {
     if (err) {
       error(err);

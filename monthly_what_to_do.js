@@ -108,7 +108,8 @@ function submit_next_month(prev_id, callback) {
 
   var submission = {
     'title': strftime('Open Thread: What to do in %B %Y', next_month),
-    'text': text + '[<< Previous month](' + link(prev_id) + ')',
+    'text': config.slogan + text
+          + '[<< Previous month](' + link(prev_id) + ')',
     'r': subreddit,
     'inboxReplies': false,
     'save': false,

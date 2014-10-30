@@ -14,7 +14,7 @@ if (process.argv[2]) {
 //
 var submission = {
   'title': strftime('Nightly random discussion - %b %d, %Y'),
-  'text': 'Magandang gabi r/' + config.defaults.subreddit + '!',
+  'text': config.slogan + 'Magandang gabi r/' + config.defaults.subreddit + '!',
   'r': config.defaults.subreddit,
   'inboxReplies': false,
   'save': false,

@@ -33,10 +33,15 @@ var defaults = {
   subreddit: "DEFAULT_SUBREDDIT"
 };
 
+// slogan
+//
+var slogan = "SLOGAN";
+
 module.exports = {
   credentials: credentials,
   user_agent: user_agent,
   app: app,
   irc: irc,
-  defaults: defaults
+  defaults: defaults,
+  slogan: slogan
 };
