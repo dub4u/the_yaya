@@ -102,9 +102,7 @@ function submit_next_month(prev_id, callback) {
       'events you want people to know of.\n\n' +
       'Please include links on web sources as much as possible and feel ' +
       'free to comment on events if you are going or post-event on your ' +
-      'reactions to it!\n\n' + 
-      '**Tip**: set the comments sorted to ***new*** below to find the ' + 
-      'most recently announced events.\n\n', next_month);
+      'reactions to it!\n\n', next_month);
 
   var submission = {
     'title': strftime('Open Thread: What to do in %B %Y', next_month),
